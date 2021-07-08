@@ -1,295 +1,136 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>Airport Info</title>
+    <link rel='stylesheet' href='css/style.css'>
 </head>
 
 <body>
-    <div class="parent">
-        <div id="metar" class="child">
-            <h2>Metar</h2>
-            <div class='inputs'>
-                <div class='innerparent'>
-                    <div class="innerchild left">
-                        <label>Departure</label>
-                    </div>
-                    <div class="innerchild right">
-                        <input id="locatorMetarD" type="text">
-                    </div>
-                </div>
-                <div class='innerparent'>
-                    <div class="innerchild left">
-                        <label>Arrival</label>
-                    </div>
-                    <div class="innerchild right">
-                        <input id="locatorMetarA" type="text">
-                    </div>
-                </div>
-            </div>
-            <div class='controls'>
-                <div>
-                    <label>Open</label>
-                </div>
-                <div>
-                    <input type="button" value="Departure" onclick="NewTab('d', 'metar')">
-                    <input type="button" value="Arrival" onclick="NewTab('a', 'metar')">
-                    <input type="button" value="All" onclick="NewTab('m', 'all')">
-                </div>
-                <div>
-                    <label>Clear</label>
-                </div>
-                <div>
-                    <input type="button" value="Departure" onclick="Clear('d', 'metar')">
-                    <input type="button" value="Arrival" onclick="Clear('a', 'metar')">
-                    <input type="button" value="All" onclick="Clear('m', 'all')">
-                </div>
-            </div>
-            <p id="meterr"></p>
+    <div id='about'>
+        <a id='by' href='https://nicolasballada.github.io' target='_blank'>@nicolasballada</a>
+        <a id='source' href='https://nicolasballada.github.io' target='_blank'>src</a>
+    </div>
+    <div class='topParent' id='topBar'>
+        <div class='topChild' id='syncDiv'>
+            <input type='button' value='Sync' onclick='syncFields()'>
         </div>
-        <div id="airnav" class="child">
-            <h2>AirNav</h2>
-            <div class='inputs'>
-                <div class='innerparent'>
-                    <div class='innerchild left'>
-                        <label>Departure</label>
-                    </div>
-                    <div class='innerchild right'>
-                        <input id="locatorAirnavD" type="text">
-                    </div>
-                </div>
-                <div class='innerparent'>
-                    <div class='innerchild left'>
-                        <label>Arrival</label>
-                    </div>
-                    <div class='innerchild right'>
-                        <input id="locatorAirnavA" type="text">
-                    </div>
-                </div>
-            </div>
-            <div class='controls'>
-                <div>
-                    <label>Open</label>
-                </div>
-                <div>
-                    <input type="button" value="Departure" onclick="NewTab('d', 'airnav')">
-                    <input type="button" value="Arrival" onclick="NewTab('a', 'airnav')">
-                    <input type="button" value="All" onclick="NewTab('an', 'all')">
-                </div>
-                <div>
-                    <label>Clear</label>
-                </div>
-                <div>
-                    <input type="button" value="Departure" onclick="Clear('d', 'airnav')">
-                    <input type="button" value="Arrival" onclick="Clear('a', 'airnav')">
-                    <input type="button" value="All" onclick="Clear('an', 'all')">
-                </div>
-            </div>
-            <p id="airerr"></p>
+        <div class='topChild' id='topControls'>
+            <input type='button' value='Open All' onclick='NewTab("all", "all")'>
+            <input type='button' value='Clear All' onclick='Clear("all", "all")'>
         </div>
     </div>
-    <script>
-
-        function airNav(icao, phase) {
-            let err = document.getElementById("airerr");
-            if (icao.value != '') {
-                let url = "https://www.airnav.com/airport/" + icao.value
-                window.open(url, "_blank");
-                if (phase == 'd') {
-                    err.innerHTML = "";
-                } else {
-                    err.innerHTML = "";
-                }
-            } else {
-                if (phase == 'd') {
-                    err.innerHTML = "Error Departure";
-                } else {
-                    err.innerHTML = "Error Arrival";
-                }
-            }
-        }
-
-        function metar(icao, phase) {
-            let err = document.getElementById("meterr");
-            if (icao.value != '') {
-                let url = "https://www.aviationweather.gov/adds/metars/index?submit=1&station_ids=" + icao.value + "&chk_metars=on&hoursStr=8&std_trans=translated"
-                window.open(url, "_blank");
-                if (phase == 'd') {
-                    err.innerHTML = "";
-                } else {
-                    err.innerHTML = "";
-                }
-            } else {
-                if (phase == 'd') {
-                    err.innerHTML = "Error Departure";
-                } else {
-                    err.innerHTML = "Error Arrival";
-                }
-            }
-        }
-
-        function Clear(phase, type) {
-            let toperr = document.getElementById("meterr");
-            let boterr = document.getElementById("airerr");
-            let textField;
-            switch (type) {
-                case 'metar':
-                    if (phase == 'd') {
-                        textField = document.getElementById('locatorMetarD');
-                        toperr.innerHTML = '';
-                    } else {
-                        textField = document.getElementById('locatorMetarA');
-                        textField.value = '';
-                        toperr.innerHTML = '';
-                    }
-                    break;
-                case 'airnav':
-                    if (phase == 'd') {
-                        textField = document.getElementById('locatorAirnavD');
-                        boterr.innerHTML = '';
-                    } else {
-                        textField = document.getElementById('locatorAirnavA');
-                        boterr.innerHTML = '';
-                    }
-                    break;
-                case 'all':
-                    if (phase == 'm') {
-                        textField = document.getElementById('locatorMetarA');
-                        textField.value = '';
-                        textField = document.getElementById('locatorMetarD');
-                        textField.value = '';
-                        toperr.innerHTML = '';
-                    } else {
-                        textField = document.getElementById('locatorAirnavA');
-                        textField.value = '';
-                        textField = document.getElementById('locatorAirnavD');
-                        textField.value = '';
-                        boterr.innerHTML = '';
-                    }
-                    break;
-            }
-        }
-
-
-        function NewTab(phase, type) {
-            let icao = "SPJC"
-
-            switch (type) {
-                case 'metar':
-                    if (phase == 'd') {
-                        icao = document.getElementById('locatorMetarD');
-                    } else {
-                        icao = document.getElementById('locatorMetarA');
-                    }
-                    metar(icao, phase);
-                    break;
-                case 'airnav':
-                    if (phase == 'd') {
-                        icao = document.getElementById('locatorAirnavD');
-                    } else {
-                        icao = document.getElementById('locatorAirnavA');
-                    }
-                    airnav(icao, phase);
-                    break;
-                case 'all':
-                    if (phase == 'm') {
-                        icao = document.getElementById('locatorMetarA');
-                        metar(icao, phase);
-                        icao = document.getElementById('locatorMetarD');
-                        metar(icao, phase);
-                    } else {
-                        icao = document.getElementById('locatorAirnavA');
-                        airNav(icao, phase);
-                        icao = document.getElementById('locatorAirnavD');
-                        airNav(icao, phase);
-                    }
-            }
-        }
-    </script>
+    <div class='parent'>
+        <div id='metar' class='child'>
+            <h2>Metar</h2>
+            <p id='meterr'></p>
+            <div class='inputs'>
+                <div class='innerparent'>
+                    <div class='innerchild'>
+                        <label>Departure</label>
+                    </div>
+                    <div class='innerchild'>
+                        <input id='locatorMetarD' type='text'>
+                    </div>
+                </div>
+                <div class='innerparent'>
+                    <div class='innerchild'>
+                        <label>Arrival</label>
+                    </div>
+                    <div class='innerchild'>
+                        <input id='locatorMetarA' type='text'>
+                    </div>
+                </div>
+            </div>
+            <div class='controls'>
+                <div>
+                    <label>Open</label>
+                </div>
+                <div>
+                    <input type='button' value='Departure' onclick='NewTab("d", "metar")'>
+                    <input type='button' value='Arrival' onclick='NewTab("a", "metar")'>
+                    <input type='button' value='All' onclick='NewTab("m", "all")'>
+                </div>
+                <div>
+                    <label>Clear</label>
+                </div>
+                <div>
+                    <input type='button' value='Departure' onclick='Clear("d", "metar")'>
+                    <input type='button' value='Arrival' onclick='Clear("a", "metar")'>
+                    <input type='button' value='All' onclick='Clear("m", "all")'>
+                </div>
+            </div>
+        </div>
+        <div id='airnav' class='child'>
+            <h2>AirNav</h2>
+            <p id='airerr'></p>
+            <div class='inputs'>
+                <div class='innerparent'>
+                    <div class='innerchild left'>
+                        <label>Departure</label>
+                    </div>
+                    <div class='innerchild centerleft'>
+                        <input id='locatorAirnavD' type='text'>
+                    </div>
+                    <div class='innerchild centerright'>
+                        <input type='button' id='airnavEmbed' value='Embed' onclick='NewTab("d", "airnav", true)'>
+                    </div>
+                    <div class='innerchild right'>
+                        <input type='button' id='airnavEmbedX' value='X' onclick='Clear("dembed", "airnav")'>
+                    </div>
+                </div>
+                <div class='innerparent'>
+                    <div class='innerchild left'>
+                        <label>Arrival</label>
+                    </div>
+                    <div class='innerchild centerleft'>
+                        <input id='locatorAirnavA' type='text'>
+                    </div>
+                    <div class='innerchild centerright'>
+                        <input type='button' id='airnavEmbed' value='Embed' onclick='NewTab("a", "airnav", true)'>
+                    </div>
+                    <div class='innerchild right'>
+                        <input type='button' id='airnavEmbedX' value='X' onclick='Clear("aembed", "airnav")'>
+                    </div>
+                </div>
+            </div>
+            <div class='controls'>
+                <div>
+                    <label>Open</label>
+                </div>
+                <div>
+                    <input type='button' value='Departure' onclick='NewTab("d", "airnav")'>
+                    <input type='button' value='Arrival' onclick='NewTab("a", "airnav")'>
+                    <input type='button' value='All' onclick='NewTab("an", "all")'>
+                </div>
+                <div>
+                    <label>Clear</label>
+                </div>
+                <div>
+                    <input type='button' value='Departure' onclick='Clear("d", "airnav")'>
+                    <input type='button' value='Arrival' onclick='Clear("a", "airnav")'>
+                    <input type='button' value='All' onclick='Clear("an", "all")'>
+                </div>
+            </div>
+        </div>
+        <div class='embedParent'>
+            <div class='embedChild'>
+                <div>
+                    <label class='embedLabel' id='departureAirnavLabel'></label>
+                </div>
+                <iframe id='departureAirnav' src='https://www.airnav.com/airport/' title='airNav Departure'
+                    style='display: none;'></iframe>
+            </div>
+            <div class='embedChild'>
+                <div>
+                    <label class='embedLabel' id='arrivalAirnavLabel'></label>
+                </div>
+                <iframe id='arrivalAirnav' src='https://www.airnav.com/airport/' title='airNav Arrival'
+                    style='display: none;'></iframe>
+            </div>
+        </div>
+    </div>
+    <script src='js/logic.js'></script>
 </body>
-
-<style>
-    body {
-        background-color: #0F0F0F;
-        font-family: Arial, Helvetica, sans-serif;
-        cursor: crosshair;
-        height: 90vh;
-    }
-
-    div {
-        padding: 5;
-        font-size: x-large;
-    }
-
-    label {
-        padding-right: 5;
-    }
-
-    .parent {
-        cursor: default;
-        margin: 1rem;
-        padding: 2rem 2rem;
-        text-align: center;
-    }
-
-    .child {
-        color: #B0B0B0;
-        display: inline-block;
-        padding: 1rem 1rem;
-        margin: 4rem;
-        align-content: space-between;
-        vertical-align: middle;
-    }
-
-    .innerparent {
-        display: grid;
-        text-align: left;
-        grid-template-columns: 8rem 8rem;
-    }
-
-    .innerchild {
-        color: #B0B0B0;
-        vertical-align: middle;
-    }
-
-    input[type="text"] {
-        cursor: text;
-        text-decoration: none;
-        color: #B0B0B0;
-        background-color: #000;
-        border: none;
-        border-bottom: 1px solid #525252;
-        padding-left: 10px;
-        font-size: x-large;
-        width: 80px;
-        height: 40px;
-    }
-
-    input[type="button"] {
-        cursor: pointer;
-        text-decoration: none;
-        font-size: x-large;
-        color: #B0B0B0;
-        border: 1px solid #525252;
-        background-color: #000;
-        width: 150px;
-        height: 50px;
-    }
-
-    #metar {
-        background-color: #011E3B;
-        border: 1px dotted #5D7DB0;
-    }
-
-    #airnav {
-        background-color: #011E3B;
-        border: 1px dotted #5D7DB0;
-    }
-
-
-    #spacer {
-        margin-bottom: 20;
-    }
-</style>
 
 </html>
