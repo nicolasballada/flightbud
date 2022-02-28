@@ -9,74 +9,57 @@
 
 <body>
   <div id='about'>
-    <a id='by' href='https://nicolasballada.github.io' target='_blank'>@nicolasballada</a>
-    <a id='source' href='https://github.com/nicolasballada/flightbud' target='_blank'>src</a>
+    <a id='by' href='https://nicolasballada.github.io/' target='_blank'>@nicolasballada</a>
+    <a id='source' href='https://github.com/nicolasballada/msfs2020-go' target='_blank'>src</a>
   </div>
-  <div class='topParent' id='topBar'>
-    <div class='topChild' id='syncDiv'>
-      <input type='button' value='Sync' onclick='syncFields()'>
+  <div id='flightbud'>
+    <!--flightbud -->
+    <div class='topParent' id='topBar'>
+      <div class='topChild' id='topControls'>
+        <button class='button' onclick='openService("all"); return false;'>Open</button>
+        <button class='button' onclick='clearAll(); return false;'>Clear</button>
+      </div>
     </div>
-    <div class='topChild' id='topControls'>
-      <input type='button' value='Open All' onclick='NewTab("all", "all")'>
-      <input type='button' value='Clear All' onclick='Clear("all", "all")'>
-    </div>
-  </div>
-  <div class='topParent' id='topBar'>
-    <div class='topChild' id='syncDiv'>
-      <input type='button' value='Sync' onclick='sync()'>
-    </div>
-    <div class='topChild' id='topControls'>
-      <input type='button' value='Open All' onclick='open("all", "all")'>
-      <input type='button' value='Clear All' onclick='clearAll("all", "all")'>
-    </div>
-  </div>
-  <div class='parent'>
-    <div id='skyvector' class='child'>
-      <h2>SkyVector</h2>
-      <p id='skyerr'></p>
-      <div class='inputs'>
+    <div class='parent'>
+      <div id='skyvector' class='child'>
+        <h2>SkyVector</h2>
+        <p id='skyerr'></p>
         <div class='innerparent'>
-          <textarea id='skyText' name="SkyVector" placeholder="SkyVector" rows="1" cols="30"></textarea>
+          <textarea id='skyText' name="SkyVector" placeholder="SkyVector"></textarea>
+        </div>
+        <div class='controls'>
+          <button class='button' onclick='openService("skyvector"); return false;'>Open</button>
         </div>
       </div>
-      <div class='controls'>
-        <input type='button' value='Open' onclick='open("skyvector")'>
-      </div>
-    </div>
-    <div id='metar' class='child'>
-      <h2>Metar</h2>
-      <p id='meterr'></p>
-      <div class='inputs'>
+      <div id='metar' class='child'>
+        <h2>Metar</h2>
+        <p id='meterr'></p>
         <div class='innerparent'>
-          <textarea id='metText' name="METAR" placeholder="METAR" rows="1" cols="30"></textarea>
+          <textarea id='metText' name="METAR" placeholder="METAR"></textarea>
+        </div>
+        <div class='controls'>
+          <button class='button' onclick='openService("metar"); return false;'>Open</button>
         </div>
       </div>
-      <div class='controls'>
-        <input type='button' value='Open' onclick='open("metar")'>
-      </div>
-    </div>
-    <div id='airNav' class='child'>
-      <h2>AirNav</h2>
-      <p id='airerr'></p>
-      <div class='inputs'>
+      <div id='airNav' class='child'>
+        <h2>AirNav</h2>
+        <p id='airerr'></p>
         <div class='innerparent'>
-          <textarea id='airText' name="AirNav" placeholder="AirNav" rows="1" cols="30"></textarea>
+          <textarea id='airText' name="AirNav" placeholder="AirNav"></textarea>
+        </div>
+        <div class='controls'>
+          <button class='button' onclick='openService("airNav"); return false;'>Open</button>
         </div>
       </div>
-      <div class='controls'>
-        <input type='button' value='Open' onclick='open("airNav")'>
-      </div>
-    </div>
-    <div id='airNav' class='child'>
-      <h2>Vatsim Map</h2>
-      <p id='placeholder'></p>
-      <div class='inputs'>
+      <div id='airNav' class='child'>
+        <h2>Vatsim Map</h2>
+        <p id='placeholder'></p>
         <div class='innerparent'>
-          <textarea id='scratchpad' name="Scratchpad" placeholder="Scratchpad" rows="1" cols="30"></textarea>
+          <textarea id='scratchpad' name="Scratchpad" placeholder="Scratchpad"></textarea>
         </div>
-      </div>
-      <div class='controls'>
-        <input type='button' value='Open' onclick='vatMap()'>
+        <div class='controls'>
+          <button class='button' onclick='vatMap(); return false;'>Open</button>
+        </div>
       </div>
     </div>
   </div>
