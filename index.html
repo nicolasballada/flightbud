@@ -1,136 +1,85 @@
 <html>
 
 <head>
-    <meta charset='UTF-8'>
-    <title>Airport Info</title>
-    <link rel='stylesheet' href='css/style.css'>
+  <meta charset='UTF-8'>
+  <title>Airport Info</title>
+  <link rel='stylesheet' href='css/style.css'>
+  <script src='js/logic.js'></script>
 </head>
 
 <body>
-    <div id='about'>
-        <a id='by' href='https://nicolasballada.github.io' target='_blank'>@nicolasballada</a>
-        <a id='source' href='https://github.com/nicolasballada/flightbud' target='_blank'>src</a>
+  <div id='about'>
+    <a id='by' href='https://nicolasballada.github.io' target='_blank'>@nicolasballada</a>
+    <a id='source' href='https://github.com/nicolasballada/flightbud' target='_blank'>src</a>
+  </div>
+  <div class='topParent' id='topBar'>
+    <div class='topChild' id='syncDiv'>
+      <input type='button' value='Sync' onclick='syncFields()'>
     </div>
-    <div class='topParent' id='topBar'>
-        <div class='topChild' id='syncDiv'>
-            <input type='button' value='Sync' onclick='syncFields()'>
-        </div>
-        <div class='topChild' id='topControls'>
-            <input type='button' value='Open All' onclick='NewTab("all", "all")'>
-            <input type='button' value='Clear All' onclick='Clear("all", "all")'>
-        </div>
+    <div class='topChild' id='topControls'>
+      <input type='button' value='Open All' onclick='NewTab("all", "all")'>
+      <input type='button' value='Clear All' onclick='Clear("all", "all")'>
     </div>
-    <div class='parent'>
-        <div id='metar' class='child'>
-            <h2>Metar</h2>
-            <p id='meterr'></p>
-            <div class='inputs'>
-                <div class='innerparent'>
-                    <div class='innerchild'>
-                        <label>Departure</label>
-                    </div>
-                    <div class='innerchild'>
-                        <input id='locatorMetarD' type='text'>
-                    </div>
-                </div>
-                <div class='innerparent'>
-                    <div class='innerchild'>
-                        <label>Arrival</label>
-                    </div>
-                    <div class='innerchild'>
-                        <input id='locatorMetarA' type='text'>
-                    </div>
-                </div>
-            </div>
-            <div class='controls'>
-                <div>
-                    <label>Open</label>
-                </div>
-                <div>
-                    <input type='button' value='Departure' onclick='NewTab("d", "metar")'>
-                    <input type='button' value='Arrival' onclick='NewTab("a", "metar")'>
-                    <input type='button' value='All' onclick='NewTab("m", "all")'>
-                </div>
-                <div>
-                    <label>Clear</label>
-                </div>
-                <div>
-                    <input type='button' value='Departure' onclick='Clear("d", "metar")'>
-                    <input type='button' value='Arrival' onclick='Clear("a", "metar")'>
-                    <input type='button' value='All' onclick='Clear("m", "all")'>
-                </div>
-            </div>
-        </div>
-        <div id='airnav' class='child'>
-            <h2>AirNav</h2>
-            <p id='airerr'></p>
-            <div class='inputs'>
-                <div class='innerparent'>
-                    <div class='innerchild left'>
-                        <label>Departure</label>
-                    </div>
-                    <div class='innerchild centerleft'>
-                        <input id='locatorAirnavD' type='text'>
-                    </div>
-                    <div class='innerchild centerright'>
-                        <input type='button' id='airnavEmbed' value='Embed' onclick='NewTab("d", "airnav", true)'>
-                    </div>
-                    <div class='innerchild right'>
-                        <input type='button' id='airnavEmbedX' value='X' onclick='Clear("dembed", "airnav")'>
-                    </div>
-                </div>
-                <div class='innerparent'>
-                    <div class='innerchild left'>
-                        <label>Arrival</label>
-                    </div>
-                    <div class='innerchild centerleft'>
-                        <input id='locatorAirnavA' type='text'>
-                    </div>
-                    <div class='innerchild centerright'>
-                        <input type='button' id='airnavEmbed' value='Embed' onclick='NewTab("a", "airnav", true)'>
-                    </div>
-                    <div class='innerchild right'>
-                        <input type='button' id='airnavEmbedX' value='X' onclick='Clear("aembed", "airnav")'>
-                    </div>
-                </div>
-            </div>
-            <div class='controls'>
-                <div>
-                    <label>Open</label>
-                </div>
-                <div>
-                    <input type='button' value='Departure' onclick='NewTab("d", "airnav")'>
-                    <input type='button' value='Arrival' onclick='NewTab("a", "airnav")'>
-                    <input type='button' value='All' onclick='NewTab("an", "all")'>
-                </div>
-                <div>
-                    <label>Clear</label>
-                </div>
-                <div>
-                    <input type='button' value='Departure' onclick='Clear("d", "airnav")'>
-                    <input type='button' value='Arrival' onclick='Clear("a", "airnav")'>
-                    <input type='button' value='All' onclick='Clear("an", "all")'>
-                </div>
-            </div>
-        </div>
-        <div class='embedParent'>
-            <div class='embedChild'>
-                <div>
-                    <label class='embedLabel' id='departureAirnavLabel'></label>
-                </div>
-                <iframe id='departureAirnav' src='https://www.airnav.com/airport/' title='airNav Departure'
-                    style='display: none;'></iframe>
-            </div>
-            <div class='embedChild'>
-                <div>
-                    <label class='embedLabel' id='arrivalAirnavLabel'></label>
-                </div>
-                <iframe id='arrivalAirnav' src='https://www.airnav.com/airport/' title='airNav Arrival'
-                    style='display: none;'></iframe>
-            </div>
-        </div>
+  </div>
+  <div class='topParent' id='topBar'>
+    <div class='topChild' id='syncDiv'>
+      <input type='button' value='Sync' onclick='sync()'>
     </div>
-    <script src='js/logic.js'></script>
+    <div class='topChild' id='topControls'>
+      <input type='button' value='Open All' onclick='open("all", "all")'>
+      <input type='button' value='Clear All' onclick='clearAll("all", "all")'>
+    </div>
+  </div>
+  <div class='parent'>
+    <div id='skyvector' class='child'>
+      <h2>SkyVector</h2>
+      <p id='skyerr'></p>
+      <div class='inputs'>
+        <div class='innerparent'>
+          <textarea id='skyText' name="SkyVector" placeholder="SkyVector" rows="1" cols="30"></textarea>
+        </div>
+      </div>
+      <div class='controls'>
+        <input type='button' value='Open' onclick='open("skyvector")'>
+      </div>
+    </div>
+    <div id='metar' class='child'>
+      <h2>Metar</h2>
+      <p id='meterr'></p>
+      <div class='inputs'>
+        <div class='innerparent'>
+          <textarea id='metText' name="METAR" placeholder="METAR" rows="1" cols="30"></textarea>
+        </div>
+      </div>
+      <div class='controls'>
+        <input type='button' value='Open' onclick='open("metar")'>
+      </div>
+    </div>
+    <div id='airNav' class='child'>
+      <h2>AirNav</h2>
+      <p id='airerr'></p>
+      <div class='inputs'>
+        <div class='innerparent'>
+          <textarea id='airText' name="AirNav" placeholder="AirNav" rows="1" cols="30"></textarea>
+        </div>
+      </div>
+      <div class='controls'>
+        <input type='button' value='Open' onclick='open("airNav")'>
+      </div>
+    </div>
+    <div id='airNav' class='child'>
+      <h2>Vatsim Map</h2>
+      <p id='placeholder'></p>
+      <div class='inputs'>
+        <div class='innerparent'>
+          <textarea id='scratchpad' name="Scratchpad" placeholder="Scratchpad" rows="1" cols="30"></textarea>
+        </div>
+      </div>
+      <div class='controls'>
+        <input type='button' value='Open' onclick='vatMap()'>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
